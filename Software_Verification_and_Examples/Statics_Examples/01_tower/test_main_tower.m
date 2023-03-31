@@ -18,13 +18,15 @@ savePath=fullfile(fileparts(mfilename('fullpath')),'data_temp'); %Save files in 
 
 %% N C of the structure
 % Manually specify node positions of a tensegrity tower.
-R=10; h=53.5; p=3;        % radius; height; number of edge
+R=10; h=535; p=3;        % radius; height; number of edge
 beta=180*(0.5-1/p); 	% rotation angle
 
-angle1=2*pi*((1:p)-1)./p;
-N=R*[cos(angle1); sin(angle1); zeros(1,p)];
-angle2=2*pi*((1:p)-1)./p+beta*pi/180;
-N=[N,[R*[cos(angle2); sin(angle2)]; h*ones(1,p)]];
+for i=1:p               % nodal coordinate matrix N
+     N(:,i)=R*[cos(2*pi*(i-1)/p),sin(2*pi*(i-1)/p),0];
+ end
+for i=p+1:2*p
+    N(:,i)=[R*cos(2*pi*(i-1)/p+beta*pi/180),R*sin(2*pi*(i-1)/p+beta*pi/180),h];
+end
  
 
 
