@@ -18,16 +18,17 @@ savePath=fullfile(fileparts(mfilename('fullpath')),'data_temp'); %Save files in 
 
 %% N C of the structure
 % Manually specify node positions of a tensegrity tower.
-R=10; h=535; p=3;        % radius; height; number of edge
+R=10; h=500; p=3;        % radius; height; number of edge
 beta=180*(0.5-1/p); 	% rotation angle
 
-for i=1:p               % nodal coordinate matrix N
-     N(:,i)=R*[cos(2*pi*(i-1)/p),sin(2*pi*(i-1)/p),0];
- end
-for i=p+1:2*p
-    N(:,i)=[R*cos(2*pi*(i-1)/p+beta*pi/180),R*sin(2*pi*(i-1)/p+beta*pi/180),h];
-end
- 
+%for i=1:p               % nodal coordinate matrix N
+  %   N(:,i)=R*[cos(2*pi*(i-1)/p),sin(2*pi*(i-1)/p),0];
+ %end
+%for i=p+1:2*p
+ %   N(:,i)=[R*cos(2*pi*(i-1)/p+beta*pi/180),R*sin(2*pi*(i-1)/p+beta*pi/180),h];
+%end
+
+N=[0 -216.51 -216.51 125 -125 0; 0 125 -125 216.51 216.51 0; 0 0 0 500 500 500];
 
 
 % Manually specify connectivity indices.
@@ -68,8 +69,8 @@ index_b=find(t<0);              % index of bar in compression
 index_s=setdiff(1:ne,index_b);	% index of strings
 [A_b,A_s,A_gp,A,r_b,r_s,r_gp,radius,E,l0,rho,mass]=tenseg_minimass(t,l,Gp,sigmas,sigmab,Eb,Es,index_b,index_s,c_b,c_s,rho_b,rho_s,thick,hollow_solid);
 % Plot the structure with radius
-R3Ddata.Bradius=interp1([min(radius),max(radius)],[0.2,0.8],r_b);
-R3Ddata.Sradius=interp1([min(radius),max(radius)],[0.2,0.8],r_s);
+R3Ddata.Bradius=interp1([min(radius),max(radius)],[9.4,10.0],r_b);
+R3Ddata.Sradius=interp1([min(radius),max(radius)],[1.0,1.6],r_s);
 R3Ddata.Nradius=ones(nn,1);
 tenseg_plot(N,C_b,C_s,[],[],[],'Single Layer Prism',R3Ddata);
 

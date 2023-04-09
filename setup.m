@@ -13,6 +13,7 @@ originFolder=fileparts(mfilename('fullpath')); %Main folder
 
 % add the function libraries
 addpath(fullfile(originFolder,'Function_library'));
+addpath(fullfile(originFolder,'Tower_AB'));
 
 % add the Software Verification and Examples (with sub-folders)
 addpath(genpath(fullfile(originFolder,'Software_Verification_and_Examples')));
