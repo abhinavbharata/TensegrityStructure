@@ -77,3 +77,42 @@ num_plt=1:2;        % number of modes to plot
 grid on
 
 ansys_input_gp(N,C,A_gp,t_gp,b,Eb,Es,rho_b,rho_s,Gp,index_s,find(t_gp>0),'Tower_AB');
+
+%% external force, forced motion of nodes, shrink of strings
+ind_w=4*3-2;w=9*1000;
+ind_dnb=3*(7:9)'; dnb0=5*ones(3,1);
+ind_dl0=1; dl0=-0.3;
+[w_t,dnb_t,l0_t,Ia_new,Ib_new]=tenseg_load_prestress(substep,ind_w,w,ind_dnb,dnb0,ind_dl0,dl0,l0,b,gravity,[0;9.8;0],C,mass);
+%% equilibrium calculation
+% input data
+data.N=N; data.C=C; data.ne=ne; data.nn=nn; data.Ia=Ia_new; data.Ib=Ib_new;
+data.E=E; data.A=A; data.l0=l0; data.index_b=index_b; data.index_s=index_s;
+data.consti_data=consti_data;   data.material=material; %constitue info
+data.w_t=w_t;  % external force
+data.dnb_t=dnb_t;% forced movement of pinned nodes
+data.l0_t=l0_t;% rest length of members
+data.substep=substep;    % substep
+% nonlinear analysis
+data_out=static_solver2(data);        %solve equilibrium using mNewton method
+
+% data_out=static_solver(data);        %solve equilibrium using mNewton method
+% data_out{i}=equilibrium_solver_pinv(data);        %solve equilibrium using mNewton method
+t_t=data_out.t_out;          %member force in every step
+n_t=data_out.n_out;          %nodal coordinate in every step
+N_out=data_out.N_out;
+%% plot member force
+tenseg_plot_result(1:substep,t_t([1;7;13],:),{'bar','horizontal string','vertical string'},{'Load step','Force (N)'},fullfile(savePath,'plot_member_force.png'),saveimg);
+%% Plot nodal coordinate curve X Y
+tenseg_plot_result(1:substep,n_t([3*4-2,3*4],:),{'4X','4Z'},{'Time (s)','Coordinate (m)'},fullfile(savePath,'plot_coordinate.png'),saveimg);
+%% Plot final configuration
+tenseg_plot_catenary(reshape(n_t(:,end),3,[]),C_b,C_s,[],[],[0,0],[],R3Ddata,l0_t(index_s,end));
+%% save output data
+if savedata==1
+    save(fullfile(savePath,['tower_static_',material{1},'.mat']));
+end
+%% make video of the dynamic
+name=fullfile(savePath,['tower_',material{1},'_slack_',num2str(material{2})]); %File name for saving
+tenseg_video_slack(n_t,C_b,C_s,l0_t,index_s,[],[],[],min(substep,50),name,savevideo,material{2});
+% tenseg_video(n_t,C_b,C_s,[],min(substep,50),name,savevideo,R3Ddata);
+%% linearized dynaimcs
+[A_lin,B_lin]=tenseg_lin_mtrx(C,N(:),E,A,l0,M,D,Ia,A_1a);

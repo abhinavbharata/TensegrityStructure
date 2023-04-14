@@ -40,7 +40,7 @@ b_new=sort(unique([b;ind_dn]));
 a_new=setdiff(1:size(G,1),b_new);  %index of free node direction
 I=eye(size(G,1));
 Ia=I(:,a_new);  %free node index
-Ib=I(:,b_new);  %pinned nod index
+Ib=I(:,b_new);  %pinned node index
 dn=zeros(size(b_new));
 
 d3nn=zeros(3*numel(G),1);

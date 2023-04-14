@@ -89,12 +89,12 @@ ind_w=4*3-2;w=9*1000;
 ind_dnb=3*(7:9)'; dnb0=5*ones(3,1);
 ind_dl0=1; dl0=-0.3;
 [w_t,dnb_t,l0_t,Ia_new,Ib_new]=tenseg_load_prestress(substep,ind_w,w,ind_dnb,dnb0,ind_dl0,dl0,l0,b,gravity,[0;9.8;0],C,mass);
-% calculate external force and
-% ind_w=[];w=[];
-% ind_dnb=1*3-2; dnb0=0.5;
-% ind_dl0=[]; dl0=[];
-% ind_w=[3*[4:6]'-2];w=[500*ones(3,1)];
-%ind_dnb=4*3-2; dnb0=0.5;
+ calculate external force and
+ ind_w=[];w=[];
+ ind_dnb=1*3-2; dnb0=0.5;
+ ind_dl0=[]; dl0=[];
+ ind_w=[3*[4:6]'-2];w=[500*ones(3,1)];
+ind_dnb=4*3-2; dnb0=0.5;
 
 %% input file of ANSYS
 ansys_input_gp_00(N,C,A_gp,t_gp,b,Eb,Es,rho_b,rho_s,Gp,index_s,find(t_gp>0),ind_w,w,ind_dnb,dnb0,fullfile(savePath,'Test_tower_ansys'));
