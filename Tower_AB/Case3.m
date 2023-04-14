@@ -32,9 +32,9 @@ C_s = tenseg_ind2C(C_s_in,N);
 C=[C_b;C_s];
 [ne,nn]=size(C);        % ne:No.of element;nn:No.of node
 % Plot the structure to make sure it looks right
-tenseg_plot(N,C_b,C_s);
-title('Single Layer Prism');
-grid on
+%tenseg_plot(N,C_b,C_s);
+%title('Single Layer Prism');
+%grid on
 %% Boundary constraints
 pinned_X=(1:3)'; pinned_Y=(1:3)'; pinned_Z=(1:3)';
 [Ia,Ib,a,b]=tenseg_boundary(pinned_X,pinned_Y,pinned_Z,nn);
@@ -62,27 +62,26 @@ index_s=setdiff(1:ne,index_b);	% index of strings
 R3Ddata.Bradius=interp1([min(radius),max(radius)],[9.4,10.0],r_b);
 R3Ddata.Sradius=interp1([min(radius),max(radius)],[1.0,1.6],r_s);
 R3Ddata.Nradius=ones(nn,1);
-tenseg_plot(N,C_b,C_s,[],[],[],'Single Layer Prism',R3Ddata);
-grid on
+%tenseg_plot(N,C_b,C_s,[],[],[],'Single Layer Prism',R3Ddata);
+%grid on
 %% mass matrix and damping matrix
 M=tenseg_mass_matrix(mass,C,lumped); % generate mass matrix
 % damping matrix
 d=0;     %damping coefficient
 D=d*2*max(sqrt(mass.*E.*A./l0))*eye(3*nn);    %critical damping
 
-
-%% mode analysis
-num_plt=1:2;        % number of modes to plot
-[V_mode,omega]=tenseg_mode(Ia,C,C_b,C_s,N(:),E,A,l0,M,num_plt,saveimg,10);
-grid on
-
-ansys_input_gp(N,C,A_gp,t_gp,b,Eb,Es,rho_b,rho_s,Gp,index_s,find(t_gp>0),'Tower_AB');
-
 %% external force, forced motion of nodes, shrink of strings
 ind_w=4*3-2;w=9*1000;
 ind_dnb=3*(7:9)'; dnb0=5*ones(3,1);
 ind_dl0=1; dl0=-0.3;
 [w_t,dnb_t,l0_t,Ia_new,Ib_new]=tenseg_load_prestress(substep,ind_w,w,ind_dnb,dnb0,ind_dl0,dl0,l0,b,gravity,[0;9.8;0],C,mass);
+% calculate external force and
+% ind_w=[];w=[];
+% ind_dnb=1*3-2; dnb0=0.5;
+% ind_dl0=[]; dl0=[];
+% ind_w=[3*[4:6]'-2];w=[500*ones(3,1)];
+% ind_dnb=4*3-2; dnb0=0.5;
+
 %% equilibrium calculation
 % input data
 data.N=N; data.C=C; data.ne=ne; data.nn=nn; data.Ia=Ia_new; data.Ib=Ib_new;

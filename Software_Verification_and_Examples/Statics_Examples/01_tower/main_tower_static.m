@@ -120,7 +120,7 @@ ind_dl0=1; dl0=-0.3;
 % ind_dnb=4*3-2; dnb0=0.5;
 
 %% input file of ANSYS
-ansys_input_gp_00(N,C,A_gp,t_gp,b,Eb,Es,rho_b,rho_s,Gp,index_s,find(t_gp>0),ind_w,w,ind_dnb,dnb0,fullfile(savePath,'tower_ansys'));
+% ansys_input_gp_00(N,C,A_gp,t_gp,b,Eb,Es,rho_b,rho_s,Gp,index_s,find(t_gp>0),ind_w,w,ind_dnb,dnb0,fullfile(savePath,'tower_ansys'));
 % ansys_input_gp(N,C,A_gp,t_gp,b,Eb,Es,rho_b,rho_s,Gp,index_s,find(t_gp>0),'tower');
 
 %% equilibrium calculation
