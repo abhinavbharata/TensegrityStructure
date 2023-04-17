@@ -5,7 +5,7 @@
 R=10; h=53.5; p=3;        % radius; height; number of edge
 beta=180*(0.5-1/p); 	% rotation angle
 
-N=[100 -116.51 -116.51 125 -125 0; 0 125 -125 216.51 216.51 -100; 0 0 0 500 500 500];
+N=[0 250 12 -27.6 185 185;0 0 221.3 78 200 -53.5; 0 0 0 500 500 500];
 
 
 % Manually specify connectivity indices.

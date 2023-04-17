@@ -18,9 +18,10 @@ savePath=fullfile(fileparts(mfilename('fullpath')),'data_temp'); %Save files in 
 
 %% N C of the structure
 % Manually specify node positions of a tensegrity tower.
-N=[0 -216.51 -216.51 125 -125 0; 0 125 -125 216.51 216.51 0; 0 0 0 500 500 500];
-
-
+%N=[0 -216.51 -216.51 125 -125 0; 0 125 -125 216.51 216.51 0; 0 0 0 500 500 500];
+N=[108.255 -108.255 -108.255 125 -125 0; 0 125 -125 108.255 108.255 -108.255; 0 0 0 500 500 500];
+%N=[0 250 12 -27.6 185 185;0 0 221.3 78 200 -53.5; 0 0 0 500 500 500];
+%N=[0 -15 -15 8.6603 -8.6603 -0;0 8.6603 -8.6603 15 15 0; 0 0 0 30 30 30];
 % Manually specify connectivity indices.
 C_b_in = [1 5;2 6;3 4];   % This is indicating the bar connection
 % Convert the above matrices into full connectivity matrices.
@@ -59,8 +60,8 @@ index_b=find(t<0);              % index of bar in compression
 index_s=setdiff(1:ne,index_b);	% index of strings
 [A_b,A_s,A_gp,A,r_b,r_s,r_gp,radius,E,l0,rho,mass]=tenseg_minimass(t,l,Gp,sigmas,sigmab,Eb,Es,index_b,index_s,c_b,c_s,rho_b,rho_s,thick,hollow_solid);
 % Plot the structure with radius
-R3Ddata.Bradius=interp1([min(radius),max(radius)],[9.4,10.0],r_b);
-R3Ddata.Sradius=interp1([min(radius),max(radius)],[1.0,1.6],r_s);
+R3Ddata.Bradius=interp1([min(radius),max(radius)],[10,10.5],r_b);
+R3Ddata.Sradius=interp1([min(radius),max(radius)],[0.2,0.8],r_s);
 R3Ddata.Nradius=ones(nn,1);
 tenseg_plot(N,C_b,C_s,[],[],[],'Single Layer Prism',R3Ddata);
 grid on

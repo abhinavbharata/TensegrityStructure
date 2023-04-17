@@ -18,7 +18,17 @@ savePath=fullfile(fileparts(mfilename('fullpath')),'data_temp'); %Save files in 
 
 %% N C of the structure
 % Manually specify node positions of a tensegrity tower.
-N=[108.255 -108.255 -108.255 125 -125 0; 0 125 -125 108.255 108.255 -108.255; 0 0 0 500 500 500];
+R=10; h=535; p=3;        % radius; height; number of edge
+beta=180*(0.5-1/p); 	% rotation angle
+
+for i=1:p               % nodal coordinate matrix N
+     N(:,i)=R*[cos(2*pi*(i-1)/p),sin(2*pi*(i-1)/p),0];
+ end
+for i=p+1:2*p
+    N(:,i)=[R*cos(2*pi*(i-1)/p+beta*pi/180),R*sin(2*pi*(i-1)/p+beta*pi/180),h];
+end
+ 
+
 
 % Manually specify connectivity indices.
 C_b_in = [1 5;2 6;3 4];   % This is indicating the bar connection
@@ -31,9 +41,9 @@ C_s = tenseg_ind2C(C_s_in,N);
 C=[C_b;C_s];
 [ne,nn]=size(C);        % ne:No.of element;nn:No.of node
 % Plot the structure to make sure it looks right
-%tenseg_plot(N,C_b,C_s);
-%title('Single Layer Prism');
-%grid on
+tenseg_plot(N,C_b,C_s);
+title('Single Layer Prism');
+
 %% Boundary constraints
 pinned_X=(1:3)'; pinned_Y=(1:3)'; pinned_Z=(1:3)';
 [Ia,Ib,a,b]=tenseg_boundary(pinned_X,pinned_Y,pinned_Z,nn);
@@ -58,16 +68,20 @@ index_b=find(t<0);              % index of bar in compression
 index_s=setdiff(1:ne,index_b);	% index of strings
 [A_b,A_s,A_gp,A,r_b,r_s,r_gp,radius,E,l0,rho,mass]=tenseg_minimass(t,l,Gp,sigmas,sigmab,Eb,Es,index_b,index_s,c_b,c_s,rho_b,rho_s,thick,hollow_solid);
 % Plot the structure with radius
-R3Ddata.Bradius=interp1([min(radius),max(radius)],[9.4,10.0],r_b);
-R3Ddata.Sradius=interp1([min(radius),max(radius)],[1.0,1.6],r_s);
+R3Ddata.Bradius=interp1([min(radius),max(radius)],[0.2,0.8],r_b);
+R3Ddata.Sradius=interp1([min(radius),max(radius)],[0.2,0.8],r_s);
 R3Ddata.Nradius=ones(nn,1);
-%tenseg_plot(N,C_b,C_s,[],[],[],'Single Layer Prism',R3Ddata);
-%grid on
+tenseg_plot(N,C_b,C_s,[],[],[],'Single Layer Prism',R3Ddata);
+
 %% mass matrix and damping matrix
 M=tenseg_mass_matrix(mass,C,lumped); % generate mass matrix
 % damping matrix
 d=0;     %damping coefficient
 D=d*2*max(sqrt(mass.*E.*A./l0))*eye(3*nn);    %critical damping
+
+%% mode analysis
+num_plt=1:2;        % number of modes to plot
+[V_mode,omega]=tenseg_mode(Ia,C,C_b,C_s,N(:),E,A,l0,M,num_plt,saveimg,10);
 
 %% external force, forced motion of nodes, shrink of strings
 ind_w=4*3-2;w=9*1000;
@@ -79,7 +93,11 @@ ind_dl0=1; dl0=-0.3;
 % ind_dnb=1*3-2; dnb0=0.5;
 % ind_dl0=[]; dl0=[];
 % ind_w=[3*[4:6]'-2];w=[500*ones(3,1)];
-% ind_dnb=4*3-2; dnb0=0.5;
+%ind_dnb=4*3-2; dnb0=0.5;
+
+%% input file of ANSYS
+ansys_input_gp_00(N,C,A_gp,t_gp,b,Eb,Es,rho_b,rho_s,Gp,index_s,find(t_gp>0),ind_w,w,ind_dnb,dnb0,fullfile(savePath,'Test_tower_ansys'));
+% ansys_input_gp(N,C,A_gp,t_gp,b,Eb,Es,rho_b,rho_s,Gp,index_s,find(t_gp>0),'tower');
 
 %% equilibrium calculation
 % input data
@@ -104,6 +122,7 @@ tenseg_plot_result(1:substep,t_t([1;7;13],:),{'bar','horizontal string','vertica
 tenseg_plot_result(1:substep,n_t([3*4-2,3*4],:),{'4X','4Z'},{'Time (s)','Coordinate (m)'},fullfile(savePath,'plot_coordinate.png'),saveimg);
 %% Plot final configuration
 tenseg_plot_catenary(reshape(n_t(:,end),3,[]),C_b,C_s,[],[],[0,0],[],R3Ddata,l0_t(index_s,end));
+
 %% save output data
 if savedata==1
     save(fullfile(savePath,['tower_static_',material{1},'.mat']));
