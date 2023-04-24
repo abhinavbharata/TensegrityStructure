@@ -1,0 +1,74 @@
+# encoding: utf-8
+# 2023 R1
+SetScriptVersion(Version="23.1.153")
+template1 = GetTemplate(TemplateName="Mechanical APDL")
+system1 = template1.CreateSystem()
+setupComponent1 = system1.GetComponent(Name="Setup")
+setupComponent1.Refresh()
+setup1 = system1.GetContainer(ComponentName="Setup")
+setup1.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+setup1.Exit()
+setupComponent1.Refresh()
+setup1.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+setup1.Exit()
+system1.Delete()
+system2 = template1.CreateSystem()
+setupComponent2 = system2.GetComponent(Name="Setup")
+setupComponent2.Refresh()
+setup2 = system2.GetContainer(ComponentName="Setup")
+setup2.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+setup2.Exit()
+system2.Delete()
+system3 = template1.CreateSystem()
+setupComponent3 = system3.GetComponent(Name="Setup")
+setupComponent3.Refresh()
+setup3 = system3.GetContainer(ComponentName="Setup")
+setup3.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+setup3.Exit()
+system3.Delete()
+system4 = template1.CreateSystem()
+setupComponent4 = system4.GetComponent(Name="Setup")
+setupComponent4.Refresh()
+setup4 = system4.GetContainer(ComponentName="Setup")
+setup4.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+setup4.Exit()
+system4.Delete()
+system5 = template1.CreateSystem()
+setupComponent5 = system5.GetComponent(Name="Setup")
+setupComponent5.Refresh()
+setup5 = system5.GetContainer(ComponentName="Setup")
+setup5.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+setup5.Exit()
+Save(Overwrite=True)
+Save(Overwrite=True)
+system6 = template1.CreateSystem(
+    Position="Right",
+    RelativeTo=system5)
+system6.DisplayText = "2nd analysis"
+setupComponent6 = system6.GetComponent(Name="Setup")
+setupComponent6.Refresh()
+setup6 = system6.GetContainer(ComponentName="Setup")
+setup6.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+setup6.Exit()
+setupComponent6.Reset()
+setupComponent6.Refresh()
+setup6.Edit(
+    Interactive=True,
+    LoadInputFiles=True)
+setupComponent6.Reset()
+setup6.Exit()
+Save(Overwrite=True)

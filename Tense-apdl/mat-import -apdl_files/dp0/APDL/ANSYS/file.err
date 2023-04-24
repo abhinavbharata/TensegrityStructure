@@ -1,0 +1,75 @@
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       14:58:54
+
+ *** WARNING ***                         CP =       5.641   TIME= 15:00:03
+ The single-frame restart file may not be complete at this abort point.  
+ Use a multi-frame restart from the last successfully converged          
+ substep.                                                                
+
+ *** WARNING ***                         CP =       5.641   TIME= 15:00:03
+ The unconverged solution (identified as time 1 substep 999999) is       
+ output for analysis debug purposes.  Results should not be used for     
+ any other purpose.                                                      
+
+ *** WARNING ***                         CP =       5.906   TIME= 15:00:04
+ The degree of freedom solution is not available.  The PLDISP command is 
+ ignored.                                                                
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       16:30:26
+
+ *** ERROR ***                           CP =       2.703   TIME= 16:30:45
+ There are no nodes defined.                                             
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       16:35:15
+
+ *** WARNING ***                         CP =       9.641   TIME= 16:38:51
+ The requested section 1 is not a BEAM and can not be displayed in the   
+ BeamTool.                                                               
+
+ *** ERROR ***                           CP =      21.359   TIME= 16:46:50
+ Element type 1 cannot be deleted while elements of this type exist.     
+ The ETDELE command is ignored.                                          
+
+ *** WARNING ***                         CP =      24.203   TIME= 16:49:11
+ The requested section 1 is not a BEAM and can not be displayed in the   
+ BeamTool.                                                               
+
+ *** WARNING ***                         CP =      24.484   TIME= 16:49:27
+ The requested section 2 is not a BEAM and can not be displayed in the   
+ BeamTool.                                                               
+
+ *** WARNING ***                         CP =      24.719   TIME= 16:49:43
+ The requested section 1 is not a BEAM and can not be displayed in the   
+ BeamTool.                                                               
+
+ *** WARNING ***                         CP =      24.797   TIME= 16:49:47
+ The requested section 3 is not a BEAM and can not be displayed in the   
+ BeamTool.                                                               
+
+ *** WARNING ***                         CP =      25.781   TIME= 16:50:34
+ There are no selected unmeshed lines.  The LATT command is ignored.     
+
+ *** WARNING ***                         CP =      26.781   TIME= 16:51:17
+ There are no selected unmeshed lines.  The LATT command is ignored.     
+
+ *** ERROR ***                           CP =      29.312   TIME= 16:52:25
+ Element 2, a LINK180 element, has no section or real constant           
+ information defined.                                                    
+
+ *** ERROR ***                           CP =      29.469   TIME= 16:52:32
+ Link element 2 references section 2 which is not a link section.        
+
+ *** ERROR ***                           CP =      29.516   TIME= 16:52:34
+ Element 3, a LINK180 element, has no section or real constant           
+ information defined.                                                    
+
+ *** ERROR ***                           CP =      29.578   TIME= 16:52:35
+ Link element 3 references section 3 which is not a link section.        
+
+ *** ERROR ***                           CP =      29.625   TIME= 16:52:35
+ The model data was checked and there were errors found.                 
+  Please check output or errors file ( D:\Fall                           
+ Sem\Tense-apdl\mat-import -apdl_files\dp0\APDL\ANSYS\file.err ) for     
+ messages.                                                               
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       16:53:05
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       17:24:24
+
+ *** ERROR ***                           CP =       1.484   TIME= 17:24:33
+ Data file file.db does not exist for RESUME.                            

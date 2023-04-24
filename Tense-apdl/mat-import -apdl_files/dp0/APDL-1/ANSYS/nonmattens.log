@@ -1,0 +1,24 @@
+/BATCH  
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       17:13:47
+RESUME,'nonmattens','db','../../../..'  
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       17:13:47
+/REPLOT,RESIZE  
+/SOLU   
+FINISH  
+/POST1  
+FINISH  
+/SOL
+FINISH  
+/PREP7  
+FLST,2,3,3,ORDE,2   
+FITEM,2,1   
+FITEM,2,-3  
+!*  
+/GO 
+DK,P51X, , , ,0,ALL, , , , , ,  
+FLST,2,3,3,ORDE,2   
+FITEM,2,4   
+FITEM,2,-6  
+!*  
+/GO 
+FK,P51X,FZ,-1000

@@ -1,0 +1,20 @@
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       15:47:12
+
+ *** WARNING ***                         CP =       8.547   TIME= 15:51:41
+ All of the selected lines in the set named on the LMESH command were    
+ already meshed.  Clear associated elements before remeshing.            
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       16:10:07
+
+ *** WARNING ***                         CP =      12.344   TIME= 16:18:18
+ All of the selected lines in the set named on the LMESH command were    
+ already meshed.  Clear associated elements before remeshing.            
+
+ *** WARNING ***                         CP =      16.750   TIME= 16:20:45
+ BEAM/PIPE elements are detected in the selected element set.  They are  
+ ignored in the nodal averaging.                                         
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       16:58:51
+
+ *** ERROR ***                           CP =       2.094   TIME= 16:59:02
+ Data file file.db does not exist for RESUME.                            
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       17:13:33
+/COM,ANSYS RELEASE 2023 R1           BUILD 23.1      UP20221128       17:23:08
